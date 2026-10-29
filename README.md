@@ -63,7 +63,7 @@ Visual reference: [Gérard DuBois / Criterion](https://www.criterion.com/current
 
 **Faster lossless decoding through elegant, efficient branch-parallel on-policy learning.**
 
-[Overview](#overview) · [How It Works](#how-it-works) · [Results](#results) · [Release Status](#release-status)
+[Overview](#overview) · [Video](#video) · [How It Works](#how-it-works) · [Results](#results) · [Release Status](#release-status)
 
 </div>
 
@@ -77,6 +77,10 @@ The key insight is simple: **a draft block needs its reference prefix and its ow
 | :---: | :---: | :---: |
 | **Up to 41.45%** higher mean acceptance length | **16.09×** supervised-token throughput | **Up to 3.56×** generation speedup |
 | Over the original drafter, averaged across five benchmarks | Over sequential-rollout OPD on 27B / DFlash V2 | Over autoregressive decoding on the same GPU |
+
+## Video
+
+https://github.com/user-attachments/assets/a09417e5-7cc4-47d9-961a-539fc3d4dfd7
 
 ## How It Works
 
