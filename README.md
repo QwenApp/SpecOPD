@@ -1,7 +1,7 @@
 <p align="center">
   <picture>
-    <source media="(max-width: 640px)" srcset="assets/prologue-mobile.png">
-    <img src="assets/prologue-desktop.png" width="100%" alt="Paths diverge. Thought goes on. A literary prologue connecting Borges, Kieślowski, and SpecOPD. Expand the text version below to read in English or Chinese.">
+    <source media="(max-width: 640px)" srcset="assets/github-cover-complete-mobile-v2.png">
+    <img src="assets/github-cover-complete-desktop-v2.png" width="100%" alt="Paths diverge. Thought goes on. A literary prologue connecting Borges, Kieślowski, and SpecOPD. Expand the text version below to read in English or Chinese.">
   </picture>
 </p>
 
@@ -136,7 +136,7 @@ Tokens count only predictions contributing to the training loss. Measurements us
 ### Inference efficiency
 
 <p align="center">
-  <img src="assets/inference-throughput.svg" width="100%" alt="Measured output throughput across five workloads at concurrency 1, 8, and 32 for AR, MTP, DSpark, DFlash V2, and SpecOPD." />
+  <img src="assets/inference-throughput-paper-v1.png" width="100%" alt="Measured output throughput across five workloads at concurrency 1, 8, and 32 for AR, MTP, DSpark, DFlash V2, and SpecOPD." />
 </p>
 
 Measured generation speedup reaches **3.56× over autoregressive decoding** on Qwen3.8-27B, using BF16, TP = 1, FlashAttention-3, and CUDA Graphs. The figure compares output throughput at concurrency 1, 8, and 32; speedups vary with workload and concurrency.
@@ -150,5 +150,7 @@ At matched optimizer steps and reference-sequence batches, SpecOPD improves mean
 This initial repository contains the project overview and selected figures. Training code, evaluation scripts, and model weights are not included in this initial release.
 
 ## Acknowledgments
+
+We thank Jue Wang and Yubo Wang at LightSeek Foundation and the vLLM team for feedback and support.
 
 SpecOPD builds on parallel draft models including DFlash, DSpark, and DFlash V2. The inference comparison includes their original configurations as baselines.
