@@ -50,7 +50,7 @@ We hope to shorten that wait, so reading, writing, and questioning can continue.
 
 Literary sources: Jorge Luis Borges, *The Garden of Forking Paths*; Krzysztof Kieślowski, [*Blind Chance*](https://www.criterion.com/current/posts/3706-blind-chance-the-conditional-mood).
 
-Artwork adapted with AI; visual reference: [Gérard DuBois / Criterion](https://www.criterion.com/current/posts/3722-blind-chance-by-gerard-dubois).
+Visual reference: [Gérard DuBois / Criterion](https://www.criterion.com/current/posts/3722-blind-chance-by-gerard-dubois).
 
 </details>
 
