@@ -80,8 +80,6 @@ The key insight is simple: **a draft block needs its reference prefix and its ow
 
 ## Video
 
-**SpecOPD — Paths diverge. Thought goes on.**
-
 https://github.com/user-attachments/assets/a09417e5-7cc4-47d9-961a-539fc3d4dfd7
 
 ## How It Works
