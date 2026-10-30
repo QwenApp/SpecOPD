@@ -1,11 +1,3 @@
-
-
-https://github.com/user-attachments/assets/d23110a6-5251-4adc-a2a2-0e7738c7bb86
-
-
-
-https://github.com/user-attachments/assets/dd188fbb-3b62-423c-b865-8e2fc1c32418
-
 <p align="center">
   <picture>
     <source media="(max-width: 640px)" srcset="assets/github-cover-complete-mobile-v2.png">
@@ -88,7 +80,7 @@ The key insight is simple: **a draft block needs its reference prefix and its ow
 
 ## Video
 
-https://github.com/user-attachments/assets/a09417e5-7cc4-47d9-961a-539fc3d4dfd7
+https://github.com/user-attachments/assets/dd188fbb-3b62-423c-b865-8e2fc1c32418
 
 ## How It Works
 
