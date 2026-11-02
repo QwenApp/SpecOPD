@@ -61,9 +61,9 @@ Visual reference: [Gérard DuBois / Criterion](https://www.criterion.com/current
 # SpecOPD
 ### Branch-Parallel On-Policy Distillation for Speculative Decoding
 
-**Faster lossless decoding through elegant, efficient branch-parallel on-policy learning.
+**Faster lossless decoding through elegant, efficient branch-parallel on-policy learning.**
 
-[🌐 Blog · 博客](https://qwenapp.github.io/SpecOPD/) · [English](https://qwenapp.github.io/SpecOPD/en.html) · [论文 · Paper](https://qwenapp.github.io/SpecOPD/specopd-paper.pdf) · [引用 · Cite](https://qwenapp.github.io/SpecOPD/#citation)**
+[Paper](https://qwenapp.github.io/SpecOPD/specopd-paper.pdf) · [Blog (English)](https://qwenapp.github.io/SpecOPD/en.html) · [博客（中文）](https://qwenapp.github.io/SpecOPD/) · [Citation](#citation)
 
 [Overview](#overview) · [Video](#video) · [How It Works](#how-it-works) · [Results](#results) · [Release Status](#release-status)
 
@@ -87,7 +87,7 @@ https://github.com/user-attachments/assets/dd188fbb-3b62-423c-b865-8e2fc1c32418
 ## How It Works
 
 <p align="center">
-  <img src="assets/branch-parallel-training.svg" width="100%" alt="SpecOPD samples reference anchors, drafts independent branches, and attaches them to a shared reference trunk." />
+  <img src="docs/method.webp" width="100%" alt="SpecOPD samples reference anchors, drafts independent branches, and attaches them to a shared reference trunk." />
 </p>
 
 1. **Sample reference anchors.** Choose positions along reference responses to provide contexts for training.
@@ -122,28 +122,26 @@ SpecOPD improves five-benchmark mean AL by up to **41.45%**, with an agentic-tas
 ### Training efficiency
 
 <p align="center">
-  <img src="assets/training-throughput.svg" width="520" alt="SpecOPD achieves 4.95 times update throughput, 3.25 times supervised tokens per update, and 16.09 times supervised-token throughput compared with Draft-OPD." />
+  <img src="docs/profile.webp" width="100%" alt="Measured execution profiles show sequential draft-and-verify collection versus branch-parallel training. SpecOPD achieves 4.95× update throughput, 3.25× supervised tokens per update, and 16.09× supervised-token throughput." />
 </p>
 
-On Qwen3.8-27B / DFlash V2 with eight high-performance GPUs, branch parallelism combines faster updates with more supervision per update:
+Branch parallelism replaces dependent full-response collection with batched draft sampling and target scoring. On Qwen3.8-27B / DFlash V2 with eight high-performance GPUs, SpecOPD combines **4.95× faster updates** with **3.25× more supervised tokens per update**, yielding **16.09× supervised-token throughput** over sequential-rollout OPD.
 
-| Metric | SpecOPD / sequential-rollout OPD |
-| --- | ---: |
-| Optimizer updates per second | **4.95×** |
-| Supervised tokens per update | **3.25×** |
-| Supervised tokens per second | **16.09×** |
-
-Tokens count only predictions contributing to the training loss. Measurements use each method's evaluated training configuration and exclude offline reference preparation.
+Tokens count predictions contributing to the training loss. Measurements use each method's evaluated configuration and exclude offline reference preparation.
 
 ### Inference efficiency
 
 <p align="center">
-  <img src="assets/inference-throughput-paper-v1.png" width="100%" alt="Measured output throughput across five workloads at concurrency 1, 8, and 32 for AR, MTP, DSpark, DFlash V2, and SpecOPD." />
+  <img src="docs/inference.webp" width="100%" alt="Measured output throughput across five workloads at concurrency 1, 8, and 32 for AR, MTP, DSpark, DFlash V2, and SpecOPD." />
 </p>
 
 Measured generation speedup reaches **3.56× over autoregressive decoding** on Qwen3.8-27B, using BF16, TP = 1, FlashAttention-3, and CUDA Graphs. The figure compares output throughput at concurrency 1, 8, and 32; speedups vary with workload and concurrency.
 
 ### On-policy learning matters
+
+<p align="center">
+  <img src="docs/ablation.webp" width="100%" alt="On-policy and off-policy training comparisons: loss, acceptance length on three benchmarks, and accepted-prefix survival." />
+</p>
 
 At matched optimizer steps and reference-sequence batches, SpecOPD improves mean AL by up to **15.71% over off-policy E2E-TV** and **6.96% over off-policy cross-entropy**. Its best evaluated checkpoint improves accepted-prefix survival at all seven draft positions, with a **4.33 percentage-point** gain at position seven.
 
@@ -153,6 +151,25 @@ This initial repository contains the project overview and selected figures. Trai
 
 ## Acknowledgments
 
-We thank Jue Wang and Yubo Wang at <img src="assets/lightseek-logo.png" width="22" height="22" alt="LightSeek logo" align="absmiddle"> LightSeek Foundation and the <img src="assets/vllm-wordmark.png" height="14" alt="vLLM" align="absmiddle"> team for feedback and support.
+We thank Jue Wang and Yubo Wang at **LightSeek Foundation** and the **vLLM** team for feedback and support.
 
 SpecOPD builds on parallel draft models including DFlash, DSpark, and DFlash V2. The inference comparison includes their original configurations as baselines.
+
+
+## Citation
+
+If you find SpecOPD useful, please cite:
+
+```bibtex
+@misc{liu2026specopd,
+  title = {{SpecOPD}: Branch-Parallel On-Policy Distillation
+           for Speculative Decoding},
+  author = {Liu, Tianyu and Zhang, Jun and Huang, Wenjie and
+            Shen, Yuhao and Xu, Tianqi and Hao, Xinyue and
+            Gu, Hongyaoxing and Liu, Xuyang and Zhang, Baolin and
+            Zhu, Yating and Ge, Shuang and Dai, Jun and
+            Chen, Lei and Li, Yue and Wan, Mingchen},
+  year = {2026},
+  url = {https://github.com/QwenApp/SpecOPD}
+}
+```
