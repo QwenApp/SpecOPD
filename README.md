@@ -140,7 +140,7 @@ Measured generation speedup reaches **3.56× over autoregressive decoding** on Q
 ### On-policy learning matters
 
 <p align="center">
-  <img src="docs/ablation.webp" width="100%" alt="On-policy and off-policy training comparisons: loss, acceptance length on three benchmarks, and accepted-prefix survival." />
+  <img src="docs/ablation.webp" width="520" alt="On-policy and off-policy training comparisons: loss, acceptance length on three benchmarks, and accepted-prefix survival." />
 </p>
 
 At matched optimizer steps and reference-sequence batches, SpecOPD improves mean AL by up to **15.71% over off-policy E2E-TV** and **6.96% over off-policy cross-entropy**. Its best evaluated checkpoint improves accepted-prefix survival at all seven draft positions, with a **4.33 percentage-point** gain at position seven.
@@ -173,3 +173,4 @@ If you find SpecOPD useful, please cite:
   url = {https://github.com/QwenApp/SpecOPD}
 }
 ```
+
