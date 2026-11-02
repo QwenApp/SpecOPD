@@ -28,3 +28,10 @@ article{min-width:0;max-width:920px}article p,article li{font-size:17px;line-hei
 @media(max-width:540px){.prologue{padding:27px 25px 30px}.prologue p,.english .prologue p,.prologue .prologue-question,.english .prologue-question{font-size:14px!important;line-height:1.95;margin-bottom:15px}}
 
 .acknowledgments{margin-top:38px;padding-top:25px;border-top:1px solid #e0e2ed;scroll-margin-top:45px}.ack-logo{display:inline-block;height:1.05em;width:auto;vertical-align:-.12em;margin:0 .15em}.lightseek-logo{height:1.2em}.acknowledgments p{color:#666e82}
+
+/* Section navigation follows the page; language changes dissolve in place. */
+html{scroll-behavior:auto}
+html.language-leaving{opacity:.35;transition:opacity 120ms ease-out}
+html.language-arriving{animation:language-arrival 220ms ease-out both}
+@keyframes language-arrival{from{opacity:.35}to{opacity:1}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}html.language-leaving,html.language-arriving{opacity:1;animation:none;transition:none}}

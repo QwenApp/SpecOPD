@@ -1,11 +1,71 @@
 'use strict';
 var isEnglish = document.documentElement.lang === 'en';
-document.querySelectorAll('.language-switch').forEach(function(link) {
-  link.addEventListener('click', function() {
-    var target = link.getAttribute('href').split('#')[0];
-    link.setAttribute('href', target + window.location.hash);
+// Keep language changes at the same place in the article, even after manual scrolling.
+// Animate intentional section navigation without animating page loads or history restore.
+document.querySelectorAll('a[href^="#"]').forEach(function(link) {
+  link.addEventListener('click', function(event) {
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    var hash = link.getAttribute('href');
+    var section = document.getElementById(decodeURIComponent(hash.slice(1)));
+    if (!section) return;
+    event.preventDefault();
+    if (location.hash !== hash) history.pushState(null, '', hash);
+    section.scrollIntoView({behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start'});
+    if (!section.hasAttribute('tabindex')) section.setAttribute('tabindex', '-1');
+    section.focus({preventScroll: true});
   });
 });
+var languagePositionKey = 'specopd-language-position';
+var readingAnchors = Array.from(document.querySelectorAll('#top, .prologue, .article-section, #code, #citation, #acknowledgments'));
+function currentReadingAnchor() {
+  var anchor = document.getElementById('top');
+  readingAnchors.forEach(function(item) {
+    if (item.id && item.getBoundingClientRect().top <= 100) anchor = item;
+  });
+  // The language controls live in the header. Keep the selected chapter when
+  // returning to that header instead of treating it as a request to start over.
+  if (anchor.id === 'top' && location.hash && location.hash !== '#top') {
+    var selectedChapter = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if (selectedChapter) anchor = selectedChapter;
+  }
+  var bounds = anchor.getBoundingClientRect();
+  return {id: anchor.id, ratio: Math.max(0, Math.min(1, -bounds.top / Math.max(bounds.height, 1)))};
+}
+document.querySelectorAll('.language-switch').forEach(function(link) {
+  link.addEventListener('click', function(event) {
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    var target = new URL(link.getAttribute('href'), window.location.href);
+    if (target.pathname === window.location.pathname) {event.preventDefault(); return;}
+    var position = currentReadingAnchor();
+    target.hash = position.id === 'top' ? '' : position.id;
+    link.href = target.href;
+    try {
+      sessionStorage.setItem(languagePositionKey, JSON.stringify({path: target.pathname, id: position.id, ratio: position.ratio, time: Date.now()}));
+    } catch (error) { /* The section link also works without browser storage. */ }
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      event.preventDefault();
+      document.documentElement.classList.add('language-leaving');
+      window.setTimeout(function() {window.location.assign(target.href);}, 120);
+      window.setTimeout(function() {document.documentElement.classList.remove('language-leaving');}, 1800);
+    }
+  });
+});
+try {
+  var savedLanguagePosition = JSON.parse(sessionStorage.getItem(languagePositionKey) || 'null');
+  if (savedLanguagePosition && savedLanguagePosition.path === location.pathname && Date.now() - savedLanguagePosition.time < 30000) {
+    sessionStorage.removeItem(languagePositionKey);
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('language-arriving');
+    var restoredAnchor = document.getElementById(savedLanguagePosition.id);
+    if (restoredAnchor) {
+      var root = document.documentElement;
+      var priorScrollBehavior = root.style.scrollBehavior;
+      root.style.scrollBehavior = 'auto';
+      var restoredBounds = restoredAnchor.getBoundingClientRect();
+      window.scrollTo(0, window.scrollY + restoredBounds.top + savedLanguagePosition.ratio * restoredBounds.height);
+      root.style.scrollBehavior = priorScrollBehavior;
+    }
+  }
+} catch (error) { /* A normal page navigation remains the fallback. */ }
 document.querySelectorAll('[data-copy-target]').forEach(function(button) {
   button.addEventListener('click', async function() {
     var content = document.getElementById(button.dataset.copyTarget).textContent;
