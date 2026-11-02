@@ -151,7 +151,7 @@ This initial repository contains the project overview and selected figures. Trai
 
 ## Acknowledgments
 
-We thank Jue Wang and Yubo Wang at **LightSeek Foundation** and the **vLLM** team for feedback and support.
+We thank Jue Wang and Yubo Wang at <img src="assets/lightseek-logo.png" width="16" height="16" alt="" align="absmiddle"> LightSeek Foundation and the <img src="assets/vllm-wordmark.png" height="12" alt="vLLM" align="absmiddle"> team for feedback and support.
 
 SpecOPD builds on parallel draft models including DFlash, DSpark, and DFlash V2. The inference comparison includes their original configurations as baselines.
 
@@ -173,4 +173,5 @@ If you find SpecOPD useful, please cite:
   url = {https://github.com/QwenApp/SpecOPD}
 }
 ```
+
 
