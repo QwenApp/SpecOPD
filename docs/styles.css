@@ -35,3 +35,7 @@ html.language-leaving{opacity:.35;transition:opacity 120ms ease-out}
 html.language-arriving{animation:language-arrival 220ms ease-out both}
 @keyframes language-arrival{from{opacity:.35}to{opacity:1}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}html.language-leaving,html.language-arriving{opacity:1;animation:none;transition:none}}
+
+/* Acknowledgment marks should have the visual weight of inline text. */
+.acknowledgments .ack-logo{height:.76em;max-width:3.1em;object-fit:contain;vertical-align:-.04em;margin:0 .12em;mix-blend-mode:multiply}
+.acknowledgments .lightseek-logo{height:.95em;max-width:1.05em;vertical-align:-.12em}
