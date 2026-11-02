@@ -61,7 +61,9 @@ Visual reference: [Gérard DuBois / Criterion](https://www.criterion.com/current
 # SpecOPD
 ### Branch-Parallel On-Policy Distillation for Speculative Decoding
 
-**Faster lossless decoding through elegant, efficient branch-parallel on-policy learning.**
+**Faster lossless decoding through elegant, efficient branch-parallel on-policy learning.
+
+[🌐 Blog · 博客](https://qwenapp.github.io/SpecOPD/) · [English](https://qwenapp.github.io/SpecOPD/en.html) · [论文 · Paper](https://qwenapp.github.io/SpecOPD/specopd-paper.pdf) · [引用 · Cite](https://qwenapp.github.io/SpecOPD/#citation)**
 
 [Overview](#overview) · [Video](#video) · [How It Works](#how-it-works) · [Results](#results) · [Release Status](#release-status)
 
