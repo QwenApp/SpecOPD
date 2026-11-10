@@ -147,7 +147,7 @@ At matched optimizer steps and reference-sequence batches, SpecOPD improves mean
 
 ## Release Status
 
-This initial repository contains the project overview and selected figures. Training code, evaluation scripts, and model weights are not included in this initial release.
+This initial repository contains the project overview. Training code, evaluation scripts, and model weights are not included in this initial release.
 
 ## Acknowledgments
 
